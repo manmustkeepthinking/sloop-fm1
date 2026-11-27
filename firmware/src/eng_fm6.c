@@ -361,17 +361,17 @@ static const char *const N_FM6_PATCH[] = {"F1", "F2", "F3", "F4", "F5", "F6", "F
                                           "B26", "B27", 0};
 _Static_assert(NELEM(N_FM6_PATCH) == FM6_NSLOT + 1u, "a PTCH name per slot");
 
-/* {ALG, FB, MLVL, MRAT, MEG, VMOD, DTUN, PTCH}: the factory patch F1..F8 as it is, DTUN on the pad. The ADSR
- * does nothing on this engine (ownenv): kept at its defaults. Names as ui.c BANK[] lists them (by kind) */
+/* Trap & Blues bank: {ALG, FB, MLVL, MRAT, MEG, VMOD, DTUN, PTCH}. PTCH loads F1..F8 from
+ * gen_fm6_patches.py. VMOD / FB nudge live velocity grit; ADSR unused (ownenv). Names as ui.c BANK[]. */
 static const preset_t FM6_PRESETS[] = {
-    {"TINE EP", {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 127, 0}, 0, 0, FX(0, 45, 25, 35)},
-    {"GLASS BELL", {0, 0, 0, 0, 0, 0, 0, 1}, {0, 0, 127, 0}, 0, 0, FX(0, 10, 30, 70)},
-    {"ROUND BASS", {0, 0, 0, 0, 0, 0, 0, 2}, {0, 0, 127, 0}, 0, 1, FX(0, 0, 10, 10)},
-    {"BRASS SECT", {0, 0, 0, 0, 0, 0, 0, 3}, {0, 0, 127, 0}, 0, 0, FX(0, 25, 20, 40)},
+    {"RHODES EP", {0, 0, 0, 0, 0, 1, 0, 0}, {0, 0, 127, 0}, 0, 0, FX(0, 40, 22, 32)},
+    {"TRAP CHIME", {0, 0, 0, 0, 0, 1, 0, 1}, {0, 0, 127, 0}, 0, 0, FX(0, 12, 28, 65)},
+    {"TRAP SUB", {0, 1, 0, 0, 0, 2, 0, 2}, {0, 0, 127, 0}, 0, 1, FX(0, 0, 8, 8)},
+    {"BRASS SECT", {0, 0, 0, 0, 0, 1, 0, 3}, {0, 0, 127, 0}, 0, 0, FX(0, 25, 20, 40)},
     {"SOFT PAD", {0, 0, 0, 0, 0, 0, 30, 4}, {0, 0, 127, 0}, 0, 0, FX(0, 60, 30, 70)},
-    {"WOOD BARS", {0, 0, 0, 0, 0, 0, 0, 5}, {0, 0, 127, 0}, 0, 0, FX(0, 0, 25, 40)},
-    {"DRAWBARS", {0, 0, 0, 0, 0, 0, 0, 6}, {0, 0, 127, 0}, 0, 0, FX(10, 40, 0, 30)},
-    {"NYLON PICK", {0, 0, 0, 0, 0, 0, 0, 7}, {0, 0, 127, 0}, 0, 0, FX(0, 20, 35, 30)},
+    {"WOOD BARS", {0, 0, 0, 0, 0, 1, 0, 5}, {0, 0, 127, 0}, 0, 0, FX(0, 0, 25, 40)},
+    {"BLUES ORG", {0, 1, 0, 0, 0, 1, 0, 6}, {0, 0, 127, 0}, 0, 0, FX(18, 35, 0, 28)},
+    {"SOUL BASS", {0, 0, 0, 0, 0, 2, 0, 7}, {0, 0, 127, 0}, 0, 1, FX(0, 15, 20, 22)},
 };
 
 /* (after Clipper 1.2) UNISON (voice.c unison_spread): the six operators moved together by r (Q32) of a turn of

@@ -425,10 +425,21 @@ static const uint8_t FM6_PMS[8] = {0, 10, 20, 33, 55, 92, 153, 255};
 static const uint32_t FM6_AMSENS[4] = {0, 4342338, 7171437, 16777216};
 #define FM6_LOGF0 50857777       /* log2 of MIDI note 0's frequency, Q24 */
 
+/* Trap & Blues live tuning: stock DX velocity curve, plus a soft-touch floor so quiet notes
+ * still speak when KVS is on, and a touch more bite above mezzo-forte for responsive playing. */
 static int32_t fm6_scale_vel(int32_t vel, int32_t sens)
 {
-    int32_t v = FM6_VELDATA[(vel < 0 ? 0 : vel > 127 ? 127 : vel) >> 1] - 239;
-    return ((sens * v + 7) >> 3) << 4;
+    int32_t v, s;
+    vel = vel < 0 ? 0 : vel > 127 ? 127 : vel;
+    v = FM6_VELDATA[vel >> 1] - 239;
+    s = ((sens * v + 7) >> 3) << 4;
+    if (sens > 0) {
+        if (vel < 40)
+            s += (40 - vel) * sens;                 /* soft: less cut (~sens * 2.5 dB-ish at vel 0) */
+        else if (vel > 100)
+            s += ((vel - 100) * sens) >> 1;         /* hard: a little more open */
+    }
+    return s;
 }
 static int32_t fm6_scale_rate(int32_t note, int32_t sens)
 {
