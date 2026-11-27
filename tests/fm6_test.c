@@ -294,7 +294,7 @@ static void retrigger(void)
         static int32_t blk[CTL];
         double prev = 0, maxstep = 0, at = 0;
         uint32_t k;
-        fm6_unpack(FM6_FACTORY[6], base);              /* ORGAN: sustained */
+        fm6_unpack(FM6_FACTORY[6], base);              /* BLUES ORG: sustained */
         setup(base, 0);
         trk_note_on(&trk[0], 60, 100);
         for (i = 0; i < FS / 2u / CTL; i++) {
@@ -660,7 +660,7 @@ static void bank(void)
     fm6_bank_boot();
     check("bank: an erased flash: no bank, every slot empty, B-slots play the init voice",
           fm6_bank_cur < 0 && !fm6_bank_has(0) && fm6_bank_get(3, got) == 1 && fm6_bank_read == fm6_bank_get);
-    fm6_unpack(FM6_FACTORY[1], v);                        /* GLASS BELL -> B4 */
+    fm6_unpack(FM6_FACTORY[1], v);                        /* TRAP CHIME -> B4 */
     fm6_pack(v, pk);
     check("bank: store into B4 (slot 3): ok, found, the record back as sent", fm6_bank_put(3, pk) == 0 &&
           fm6_bank_cur >= 0 && fm6_bank_has(3) && !fm6_bank_has(2) && fm6_bank_get(3, got) == 0 && !memcmp(got, pk, FM6_PACKED));
@@ -671,7 +671,7 @@ static void bank(void)
         trk[0].p[P_E7] = FM6_NFACTORY + 3;
         fm6_poll();
         check("bank: PTCH B4 loads the stored patch (main loop)", fm6_slot[0] == FM6_NFACTORY + 3u &&
-              !memcmp(fm6_patch[0] + FP_NAME, "GLASS BELL", 10));
+              !memcmp(fm6_patch[0] + FP_NAME, "TRAP CHIME", 10));
         fm6_unpack(FM6_FACTORY[5], v);                    /* WOOD BARS over it */
         fm6_pack(v, pk);
         fm6_bank_put(3, pk);

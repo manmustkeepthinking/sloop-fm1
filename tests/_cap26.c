@@ -129,7 +129,7 @@ int main(int argc, char **argv)
     key(key_of_white(0)); key(key_of_white(1)); key(key_of_white(1)); ui.force = 1; frame(); shot("b_chain");
     release(B_SAVE); frames(4);
     song.sel = 2; load(2, "KOTO"); open_page("EDIT 1"); frames(3); shot("b_phys");
-    song.sel = 1; load(1, "TINE EP"); open_page("EDIT 1"); frames(3); shot("b_fm6");
+    song.sel = 1; load(1, "RHODES EP"); open_page("EDIT 1"); frames(3); shot("b_fm6");
     trk[1].p[P_CHORD] = 3; trk[1].p[P_ROOT] = 2;
     go_home(); frames(2);
     press(B_SCL); frames(12); ui.force = 1; frames(2); shot("b_scl"); release(B_SCL); frames(4);

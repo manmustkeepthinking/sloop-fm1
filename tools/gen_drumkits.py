@@ -206,13 +206,26 @@ KITS = [
     ("80S", "80S POP", 0, K707),
     ("VINTAGE", "RHYTHM BOX", 0, KCR78),
     # -- hip-hop
+    # Trap & Blues bank: deep 808 boom, snappy snares/claps, metallic hats for rolls
     ("TRAP", "TRAP", 0, kit(K808,
-        KICK=S("sine", 52, 18, 26, 10, 520, 124, click=50, drive=30),
-        KICK2=S("sine", 46, 12, 40, 80, 1900, 124, click=20, drive=48),            # the 808, distorted
-        SNARE=S("tri", 210, 6, 10, 0, 90, 80, 1.7, 60, 40, "white", 116, 6, 150, ("hp", 2300, .2), drive=26),
-        CLAP=dict(nlev=126, ndec=170, filt=("bp", 1500, .4), hpf=1100),
-        CHH=dict(ndec=26, filt=("bp", 10500, .45), hpf=9000),
-        OHH=dict(ndec=260))),
+        # Punchy transient kick with body that still reads on small speakers
+        KICK=S("sine", 48, 24, 28, 6, 620, 124, 2.0, 40, 56, "white", 32, 0, 8,
+               ("lp", 4800, .12), drive=44),
+        # Long clean 808 sub: deep boom, slow pitch fall, grit from drive harmonics
+        KICK2=S("sine", 38, 14, 55, 110, 2600, 124, 2.0, 28, 18,
+                filt=("lp", 850, .08, "all"), drive=56),
+        # Crisp, snappy trap snare with high-end crack
+        SNARE=S("tri", 225, 8, 8, 0, 65, 70, 1.85, 52, 52, "white", 124, 3, 95,
+                ("hp", 3000, .24), drive=36),
+        # Tighter secondary snare for rolls / ghost notes
+        SNARE2=S("tri", 290, 7, 6, 0, 40, 64, 1.65, 46, 56, "white", 120, 0, 60,
+                 ("bp", 6800, .42), drive=30),
+        # Tight clap with high-end presence
+        CLAP=S(None, src="clap", nlev=127, ndec=130, filt=("bp", 1750, .44), hpf=1450),
+        # Sharp metallic closed hat for rapid 1/32 and triplet rolls
+        CHH=S(None, 230, src="metal", nlev=122, ndec=16, filt=("bp", 11200, .52), hpf=9800, click=16),
+        # Open hat that chokes cleanly under the closed hat
+        OHH=S(None, 230, src="metal", nlev=118, nhold=6, ndec=180, filt=("bp", 10800, .5), hpf=9200))),
     ("DRILL", "UK DRILL", 0, kit(K808,
         KICK=S("sine", 50, 14, 30, 8, 380, 124, click=44, drive=26),
         KICK2=S("sine", 44, 12, 220, 40, 1900, 124, click=16, drive=44),            # the sliding 808
